@@ -22,7 +22,7 @@ namespace I_O_with_files.Forms.Util
         {
 
             if (arquivoNaoEncontrado())
-                throw new ArgumentException("Arquivo não encontrado!");
+                throw new ArgumentException("Arquivo " + fileName + "encontrado!");
 
             return Conteudo();
         }

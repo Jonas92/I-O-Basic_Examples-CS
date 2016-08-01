@@ -24,15 +24,34 @@ namespace I_O_with_files.Forms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LeitorDeArquivo leitor = new LeitorDeArquivo(FILE_NAME);
-            TextoTxt.Text = leitor.ConteudoDoArquivo();
+            try
+            {
+                LeitorDeArquivo leitor = new LeitorDeArquivo(FILE_NAME);
+                TextoTxt.Text = leitor.ConteudoDoArquivo();
+            }
+            catch (ArgumentException a)
+            {
+                MessageBox.Show(a.Message);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao ler o arquivo " + FILE_NAME);
+            }
         }
 
         private void salvaTextoBtn_Click(object sender, EventArgs e)
         {
-            EscritorDeArquivo escritor = new EscritorDeArquivo(FILE_NAME);
-            string conteudo = TextoTxt.Text;
-            escritor.Escreve(conteudo);
+            try
+            {
+                EscritorDeArquivo escritor = new EscritorDeArquivo(FILE_NAME);
+                string conteudo = TextoTxt.Text;
+                escritor.Escreve(conteudo);
+                MessageBox.Show("Texto salvo em " + FILE_NAME + " com sucesso!");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Erro ao salvar texto no arquivo " + FILE_NAME);
+            }
         }
     }
 }
