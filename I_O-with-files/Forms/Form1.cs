@@ -1,4 +1,5 @@
 ﻿using I_O_with_files.Forms.Util;
+using I_O_with_files.Util;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,13 +30,9 @@ namespace I_O_with_files.Forms
 
         private void salvaTextoBtn_Click(object sender, EventArgs e)
         {
-            Stream saida = File.Open(FILE_NAME, FileMode.Create);
-            StreamWriter escritor = new StreamWriter(saida);
-            escritor.WriteLine(TextoTxt.Text);
-            escritor.Close();
-            saida.Close();
-
-
+            EscritorDeArquivo escritor = new EscritorDeArquivo(FILE_NAME);
+            string conteudo = TextoTxt.Text;
+            escritor.Escreve(conteudo);
         }
     }
 }
