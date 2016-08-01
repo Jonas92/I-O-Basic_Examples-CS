@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace I_O_with_files
+namespace I_O_with_files.Forms
 {
     public partial class Form1 : Form
     {

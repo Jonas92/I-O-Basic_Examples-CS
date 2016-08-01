@@ -1,4 +1,4 @@
-﻿namespace I_O_with_files
+﻿namespace I_O_with_files.Forms
 {
     partial class Form1
     {
