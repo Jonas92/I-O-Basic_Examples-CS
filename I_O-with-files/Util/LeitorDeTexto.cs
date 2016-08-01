@@ -32,17 +32,20 @@ namespace I_O_with_files.Forms.Util
         private string Conteudo()
         {
             string conteudo = "";
-            Stream entrada = File.Open(fileName, FileMode.Open);
-            StreamReader leitor = new StreamReader(entrada);
-            string linha = leitor.ReadLine();
-            while (linha != null)
-            {
-                conteudo += linha;
-                linha = leitor.ReadLine();
-            }
 
-            leitor.Close();
-            entrada.Close();
+            using (Stream entrada = File.Open(fileName, FileMode.Open))
+            {
+
+                using (StreamReader leitor = new StreamReader(entrada))
+                {
+                    string linha = leitor.ReadLine();
+                    while (linha != null)
+                    {
+                        conteudo += linha;
+                        linha = leitor.ReadLine();
+                    }
+                }
+            }
 
             return conteudo;
         }
@@ -63,12 +66,15 @@ namespace I_O_with_files.Forms.Util
         private string ConteudoSemPerformance()
         {
             string conteudo = "";
-            Stream entrada = File.Open(fileName, FileMode.Open);
-            StreamReader leitor = new StreamReader(entrada);
-            conteudo = leitor.ReadToEnd();
 
-            leitor.Close();
-            entrada.Close();
+            using (Stream entrada = File.Open(fileName, FileMode.Open))
+            {
+
+                using (StreamReader leitor = new StreamReader(entrada))
+                {
+                    conteudo = leitor.ReadToEnd();
+                }
+            }
 
             return conteudo;
         }

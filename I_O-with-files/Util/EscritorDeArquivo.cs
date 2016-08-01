@@ -18,11 +18,14 @@ namespace I_O_with_files.Util
 
         public void Escreve(string conteudo)
         {
-            Stream saida = File.Open(fileName, FileMode.Create);
-            StreamWriter escritor = new StreamWriter(saida);
-            escritor.WriteLine(conteudo);
-            escritor.Close();
-            saida.Close();
+            using (Stream saida = File.Open(fileName, FileMode.Create))
+            {
+
+                using (StreamWriter escritor = new StreamWriter(saida))
+                {
+                    escritor.WriteLine(conteudo);
+                }
+            }
         }
     }
 }
