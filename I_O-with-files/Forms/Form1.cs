@@ -34,6 +34,8 @@ namespace I_O_with_files.Forms
             escritor.WriteLine(TextoTxt.Text);
             escritor.Close();
             saida.Close();
+
+
         }
     }
 }

@@ -16,25 +16,48 @@ namespace I_O_with_files.Forms.Util
             this.fileName = fileName;
         }
 
+        #region Método de leitura do arquivo
+
         public string ConteudoDoArquivo()
         {
-            string conteudo = "";
 
-            if (File.Exists(fileName))
+            if (arquivoNaoEncontrado())
+                throw new ArgumentException("Arquivo não encontrado!");
+
+            return Conteudo();
+        }
+
+        #region Retorna o conteúdo do arquivo
+
+        private string Conteudo()
+        {
+            string conteudo = "";
+            Stream entrada = File.Open(fileName, FileMode.Open);
+            StreamReader leitor = new StreamReader(entrada);
+            string linha = leitor.ReadLine();
+            while (linha != null)
             {
-                Stream entrada = File.Open(fileName, FileMode.Open);
-                StreamReader leitor = new StreamReader(entrada);
-                string linha = leitor.ReadLine();
-                while (linha != null)
-                {
-                    conteudo += linha;
-                    linha = leitor.ReadLine();
-                }
-                leitor.Close();
-                entrada.Close();
+                conteudo += linha;
+                linha = leitor.ReadLine();
             }
+
+            leitor.Close();
+            entrada.Close();
 
             return conteudo;
         }
+
+        #endregion
+
+        #region Verifica existência do arquivo
+
+        private bool arquivoNaoEncontrado()
+        {
+            return !File.Exists(fileName);
+        }
+
+        #endregion
+
+        #endregion
     }
 }
