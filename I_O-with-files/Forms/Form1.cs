@@ -34,5 +34,14 @@ namespace I_O_with_files.Forms
                 entrada.Close();
             }
         }
+
+        private void salvaTextoBtn_Click(object sender, EventArgs e)
+        {
+            Stream saida = File.Open("texto.txt", FileMode.Create);
+            StreamWriter escritor = new StreamWriter(saida);
+            escritor.WriteLine(TextoTxt.Text);
+            escritor.Close();
+            saida.Close();
+        }
     }
 }
