@@ -1,4 +1,5 @@
-﻿using System;
+﻿using I_O_with_files.Forms.Util;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +14,8 @@ namespace I_O_with_files.Forms
 {
     public partial class Form1 : Form
     {
+        private const string FILE_NAME = "texto.txt";
+
         public Form1()
         {
             InitializeComponent();
@@ -20,24 +23,13 @@ namespace I_O_with_files.Forms
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            if (File.Exists("texto.txt"))
-            {
-                Stream entrada = File.Open("texto.txt", FileMode.Open);
-                StreamReader leitor = new StreamReader(entrada);
-                string linha = leitor.ReadLine();
-                while (linha != null)
-                {
-                    TextoTxt.Text += linha;
-                    linha = leitor.ReadLine();
-                }
-                leitor.Close();
-                entrada.Close();
-            }
+            LeitorDeArquivo leitor = new LeitorDeArquivo(FILE_NAME);
+            TextoTxt.Text = leitor.ConteudoDoArquivo();
         }
 
         private void salvaTextoBtn_Click(object sender, EventArgs e)
         {
-            Stream saida = File.Open("texto.txt", FileMode.Create);
+            Stream saida = File.Open(FILE_NAME, FileMode.Create);
             StreamWriter escritor = new StreamWriter(saida);
             escritor.WriteLine(TextoTxt.Text);
             escritor.Close();
