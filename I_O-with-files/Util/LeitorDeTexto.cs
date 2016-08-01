@@ -58,6 +58,23 @@ namespace I_O_with_files.Forms.Util
 
         #endregion
 
+        #region Retorna o conteúdo do arquivo, sem levar em consideração a performance
+
+        private string ConteudoSemPerformance()
+        {
+            string conteudo = "";
+            Stream entrada = File.Open(fileName, FileMode.Open);
+            StreamReader leitor = new StreamReader(entrada);
+            conteudo = leitor.ReadToEnd();
+
+            leitor.Close();
+            entrada.Close();
+
+            return conteudo;
+        }
+
+        #endregion
+
         #endregion
     }
 }
